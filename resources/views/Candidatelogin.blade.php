@@ -1,21 +1,11 @@
-<?php
-session_start();
-
-if(isset($_SESSION['id_user']) || isset($_SESSION['id_company'])) { 
-  header("Location: index.php");
-  exit();
-}
-?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Job Portal</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate-Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -42,15 +32,15 @@ if(isset($_SESSION['id_user']) || isset($_SESSION['id_company'])) {
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Candidates Login</p>
+    <p class="login-box-msg">Candidate Login</p>
 
-    <form method="post" action="checklogin.php">
+    <form method="post" action="">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+        <input type="email" name="email" class="form-control" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        <input type="password" name="password" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -59,57 +49,16 @@ if(isset($_SESSION['id_user']) || isset($_SESSION['id_company'])) {
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat"><a href="candashboard">Sign In</a></button>
         </div>
         <!-- /.col -->
+        <div class="col-xs-12">
+  
+          </div>          
       </div>
     </form>
 
     <br>
-
-    <?php 
-    //If User have successfully registered then show them this success message
-    //Todo: Remove Success Message without reload?
-    if(isset($_SESSION['registerCompleted'])) {
-      ?>
-      <div>
-        <p id="successMessage" class="text-center">Check your email!</p>
-      </div>
-    <?php
-     unset($_SESSION['registerCompleted']); }
-    ?>   
-    <?php 
-    //If User Failed To log in then show error message.
-    if(isset($_SESSION['loginError'])) {
-      ?>
-      <div>
-        <p class="text-center">Invalid Email/Password! Try Again!</p>
-      </div>
-    <?php
-     unset($_SESSION['loginError']); }
-    ?>      
-
-    <?php 
-    //If User Failed To log in then show error message.
-    if(isset($_SESSION['userActivated'])) {
-      ?>
-      <div>
-        <p class="text-center">Your Account Is Active. You Can Login</p>
-      </div>
-    <?php
-     unset($_SESSION['userActivated']); }
-    ?>    
-
-     <?php 
-    //If User Failed To log in then show error message.
-    if(isset($_SESSION['loginActiveError'])) {
-      ?>
-      <div>
-        <p class="text-center"><?php echo $_SESSION['loginActiveError']; ?></p>
-      </div>
-    <?php
-     unset($_SESSION['loginActiveError']); }
-    ?>   
 
   </div>
   <!-- /.login-box-body -->
@@ -133,10 +82,5 @@ if(isset($_SESSION['id_user']) || isset($_SESSION['id_company'])) {
     });
   });
 </script>
-<script type="text/javascript">
-      $(function() {
-        $("#successMessage:visible").fadeOut(8000);
-      });
-    </script>
 </body>
 </html>

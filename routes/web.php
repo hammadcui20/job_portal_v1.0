@@ -23,3 +23,21 @@ Route::get('Registeration',function(){
 Route::get('Company-Registeration',function(){
     return view('companyregister');
 });
+//Candidate Portal Routing
+Route::get('candashboard',function(){
+    return view('user/index');
+});
+Route::get('edit',function(){
+    return view('user/edit-profile');
+});
+// Company Portal Routing
+Route::get('comdashboard',function(){
+    return view('company/index');
+});
+//Admin Login
+Route::get('Admin',function(){
+    return view('admin/index');
+});
+Route::get('dashboard',function(){
+    return view('admin/dashboard');
+});
