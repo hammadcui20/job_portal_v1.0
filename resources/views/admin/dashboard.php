@@ -66,10 +66,10 @@
               <div class="box-body no-padding">
                 <ul class="nav nav-pills nav-stacked">
                   <li class="active"><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                  <li><a href="active-jobs.php"><i class="fa fa-briefcase"></i> Active Jobs</a></li>
-                  <li><a href="applications.php"><i class="fa fa-address-card-o"></i> Applications</a></li>
-                  <li><a href="companies.php"><i class="fa fa-building"></i> Companies</a></li>
-                  <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                  <li><a href="activej"><i class="fa fa-briefcase"></i> Active Jobs</a></li>
+                  <li><a href="app"><i class="fa fa-address-card-o"></i> Applications</a></li>
+                  <li><a href="com"><i class="fa fa-building"></i> Companies</a></li>
+                  <li><a href="out"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
                 </ul>
               </div>
             </div>

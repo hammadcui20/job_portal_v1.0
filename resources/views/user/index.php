@@ -68,11 +68,11 @@
               <div class="box-body no-padding">
                 <ul class="nav nav-pills nav-stacked">
                   <li><a href="edit"><i class="fa fa-user"></i> Edit Profile</a></li>
-                  <li class="edit"><a href="index"><i class="fa fa-address-card-o"></i> My Applications</a></li>
-                  <li><a href="edit"><i class="fa fa-list-ul"></i> Jobs</a></li>
-                  <li><a href="edit"><i class="fa fa-envelope"></i> Mailbox</a></li>
-                  <li><a href="edit"><i class="fa fa-gear"></i> Settings</a></li>
-                  <li><a href="edit"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                  <li class="active"><a href="index"><i class="fa fa-address-card-o"></i> My Applications</a></li>
+                  <li><a href="jobs"><i class="fa fa-list-ul"></i> Jobs</a></li>
+                  <li><a href="mail"><i class="fa fa-envelope"></i> Mailbox</a></li>
+                  <li><a href="settings"><i class="fa fa-gear"></i> Settings</a></li>
+                  <li><a href="out"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
                 </ul>
               </div>
             </div>

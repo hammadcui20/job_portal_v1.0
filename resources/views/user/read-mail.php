@@ -1,48 +1,4 @@
 
-<?php
-
-//To Handle Session Variables on This Page
-session_start();
-
-//If user Not logged in then redirect them back to homepage. 
-if(empty($_SESSION['id_user'])) {
-  header("Location: ../index.php");
-  exit();
-}
-
-require_once("../db.php");
-
-$sql = "SELECT * FROM mailbox WHERE id_mailbox='$_GET[id_mail]' AND (id_fromuser='$_SESSION[id_user]' OR id_touser='$_SESSION[id_user]')";
-$result = $conn->query($sql);
-if($result->num_rows >  0 ){
-  $row = $result->fetch_assoc();
-  if($row['fromuser'] == "company") {
-    $sql1 = "SELECT * FROM company WHERE id_company='$row[id_fromuser]'";
-    $result1 = $conn->query($sql1);
-    if($result1->num_rows >  0 ){
-      $rowCompany = $result1->fetch_assoc();
-    }
-    $sql2 = "SELECT * FROM users WHERE id_user='$row[id_touser]'";
-    $result2 = $conn->query($sql2);
-    if($result2->num_rows >  0 ){
-      $rowUser = $result2->fetch_assoc();
-    }
-  } else {
-    $sql1 = "SELECT * FROM company WHERE id_company='$row[id_touser]'";
-    $result1 = $conn->query($sql1);
-    if($result1->num_rows >  0 ){
-      $rowCompany = $result1->fetch_assoc();
-    }
-    $sql2 = "SELECT * FROM users WHERE id_user='$row[id_fromuser]'";
-    $result2 = $conn->query($sql2);
-    if($result2->num_rows >  0 ){
-      $rowUser = $result2->fetch_assoc();
-    }
-  }
-  
-}
-
-?>
 
 <!DOCTYPE html>
 <html>
@@ -114,7 +70,7 @@ if($result->num_rows >  0 ){
           <div class="col-md-3">
             <div class="box box-solid">
               <div class="box-header with-border">
-                <h3 class="box-title">Welcome <b><?php echo $_SESSION['name']; ?></b></h3>
+                <h3 class="box-title">Welcome <b></b></h3>
               </div>
               <div class="box-body no-padding">
                 <ul class="nav nav-pills nav-stacked">
@@ -137,9 +93,8 @@ if($result->num_rows >  0 ){
                   <!-- /.box-header -->
                   <div class="box-body no-padding">
                     <div class="mailbox-read-info">
-                      <h3><?php echo $row['subject']; ?></h3>
-                      <h5>From: <?php if($row['fromuser'] == "company") { echo $rowCompany['companyname']; } else { echo $rowUser['firstname']; } ?>
-                        <span class="mailbox-read-time pull-right"><?php echo date("d-M-Y h:i a", strtotime($row['createdAt'])); ?></span></h5>
+                      <h3></h3>
+
                     </div>
                     <div class="mailbox-read-message">
                       <?php echo stripcslashes($row['message']); ?>
@@ -149,29 +104,21 @@ if($result->num_rows >  0 ){
                   <!-- /.box-body -->
                 </div>
 
-                <?php
-
-                $sqlReply = "SELECT * FROM reply_mailbox WHERE id_mailbox='$_GET[id_mail]'";
-                $resultReply = $conn->query($sqlReply);
-                if($resultReply->num_rows > 0) {
-                  while($rowReply =  $resultReply->fetch_assoc()) {
-                    ?>
+              
                   <div class="box box-primary">
                     <div class="box-body no-padding">
                       <div class="mailbox-read-info">
                         <h3>Reply Message</h3>
-                        <h5>From: <?php if($rowReply['usertype'] == "company") { echo $rowCompany['companyname']; } else { echo $rowUser['firstname']; } ?>
-                          <span class="mailbox-read-time pull-right"><?php echo date("d-M-Y h:i a", strtotime($rowReply['createdAt'])); ?></span></h5>
-                      </div>
+                           </div>
                       <div class="mailbox-read-message">
-                        <?php echo stripcslashes($rowReply['message']); ?>
+                       
                       </div>
                     </div>
                   </div>
-                    <?php
+                  
                   }
                 }
-                ?>
+                
                 
 
                 <div class="box box-primary">
@@ -184,7 +131,7 @@ if($result->num_rows >  0 ){
                       <form action="reply-mailbox.php" method="post">
                         <div class="form-group">
                           <textarea class="form-control input-lg" id="description" name="description" placeholder="Job Description"></textarea>
-                          <input type="hidden" name="id_mail" value="<?php echo $_GET['id_mail']; ?>">
+                          <input type="hidden" name="id_mail" >
                         </div>
                         <div class="form-group">
                           <button type="submit" class="btn btn-flat btn-success">Reply</button>

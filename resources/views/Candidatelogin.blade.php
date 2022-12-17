@@ -34,7 +34,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">Candidate Login</p>
 
-    <form method="post" action="">
+    <form method="GET" action="canlogin">
       <div class="form-group has-feedback">
         <input type="email" name="email" class="form-control" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -49,7 +49,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat"><a href="candashboard">Sign In</a></button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
         </div>
         <!-- /.col -->
         <div class="col-xs-12">
@@ -66,7 +66,7 @@
 <!-- /.login-box -->
 
 <!-- jQuery 3 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
@@ -81,6 +81,6 @@
       increaseArea: '20%' // optional
     });
   });
-</script>
+</script> --}}
 </body>
 </html>

@@ -86,7 +86,7 @@
       <div class="container">
         <div class="row latest-job margin-top-50 margin-bottom-20 bg-white">
           <h1 class="text-center margin-bottom-20">CREATE YOUR PROFILE</h1>
-          <form method="post" id="registerCandidates" action="adduser.php" enctype="multipart/form-data">
+          <form method="GET" id="registerCandidates" action="csign" enctype="multipart/form-data">
             <div class="col-md-6 latest-job ">
               <div class="form-group">
                 <input class="form-control input-lg" type="text" id="fname" name="fname" placeholder="First Name *" required>
@@ -98,21 +98,21 @@
                 <input class="form-control input-lg" type="text" id="email" name="email" placeholder="Email *" required>
               </div>
               <div class="form-group">
-                <textarea class="form-control input-lg" rows="4" id="aboutme" name="aboutme" placeholder="Brief intro about yourself *" required></textarea>
+                <textarea class="form-control input-lg" rows="4" id="aboutme" name="intro" placeholder="Brief intro about yourself *" required></textarea>
               </div>
               <div class="form-group">
                 <label>Date Of Birth</label>
-                <input class="form-control input-lg" type="date" id="dob" min="1960-01-01" max="1999-01-31" name="dob" placeholder="Date Of Birth">
+                <input class="form-control input-lg" type="date" id="dob" min="1960-01-01" max="1999-01-31" name="bday" placeholder="Date Of Birth">
               </div>
               <div class="form-group">
                 <input class="form-control input-lg" type="text" id="age" name="age" placeholder="Age" readonly>
               </div>
               <div class="form-group">
                 <label>Passing Year</label>
-                <input class="form-control input-lg" type="date" id="passingyear" name="passingyear" placeholder="Passing Year">
+                <input class="form-control input-lg" type="date" id="passingyear" name="pyear" placeholder="Passing Year">
               </div>       
               <div class="form-group">
-                <input class="form-control input-lg" type="text" id="qualification" name="qualification" placeholder="Highest Qualification">
+                <input class="form-control input-lg" type="text" id="qualification" name="hq" placeholder="Highest Qualification">
               </div>
               <div class="form-group">
                 <input class="form-control input-lg" type="text" id="stream" name="stream" placeholder="Stream">
@@ -152,7 +152,7 @@
                     Password Mismatch!! 
                   </div>
               <div class="form-group">
-                <input class="form-control input-lg" type="text" id="contactno" name="contactno" minlength="10" maxlength="10" onkeypress="return validatePhone(event);" placeholder="Phone Number">
+                <input class="form-control input-lg" type="text" id="contactno" name="phone" minlength="10" maxlength="10" onkeypress="return validatePhone(event);" placeholder="Phone Number">
               </div>
               <div class="form-group">
                 <textarea class="form-control input-lg" rows="4" id="address" name="address" placeholder="Address"></textarea>
@@ -167,12 +167,12 @@
                 <textarea class="form-control input-lg" rows="4" id="skills" name="skills" placeholder="Enter Skills"></textarea>
               </div>              
               <div class="form-group">
-                <input class="form-control input-lg" type="text" id="designation" name="designation" placeholder="Designation">
+                <input class="form-control input-lg" type="text" id="designation" name="desig" placeholder="Designation">
               </div>
 
               <div class="form-group">
                 <label style="color: red;">File Format PDF Only!</label>
-                <input type="file" name="resume" class="btn btn-flat btn-danger" required>
+                <input type="file" name="pdf" class="btn btn-flat btn-danger" required>
               </div>
             </div>
           </form>

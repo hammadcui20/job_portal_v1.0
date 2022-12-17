@@ -1,16 +1,4 @@
-<?php
 
-//To Handle Session Variables on This Page
-session_start();
-
-//If user Not logged in then redirect them back to homepage. 
-if(empty($_SESSION['id_user'])) {
-  header("Location: ../index.php");
-  exit();
-}
-
-require_once("../db.php");
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,7 +67,7 @@ require_once("../db.php");
           <div class="col-md-3">
             <div class="box box-solid">
               <div class="box-header with-border">
-                <h3 class="box-title">Welcome <b><?php echo $_SESSION['name']; ?></b></h3>
+                <h3 class="box-title">Welcome <b></b></h3>
               </div>
               <div class="box-body no-padding">
                 <ul class="nav nav-pills nav-stacked">
@@ -103,15 +91,7 @@ require_once("../db.php");
               <div class="box-body">
                 <div class="form-group">
                   <select name="to" class="form-control">
-                    <?php 
-                    $sql = "SELECT * FROM apply_job_post INNER JOIN company ON apply_job_post.id_company=company.id_company WHERE apply_job_post.id_user='$_SESSION[id_user]' AND apply_job_post.status='2'";
-                    $result = $conn->query($sql);
-                    if($result->num_rows > 0) {
-                      while($row = $result->fetch_assoc()) {
-                        echo '<option value="'.$row['id_company'].'">'.$row['companyname'].'</option>';
-                      }
-                    }
-                    ?>
+
                   </select>
                 </div>
                 <div class="form-group">

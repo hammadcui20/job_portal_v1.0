@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company-Register</title>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
+    <title>Company-Registration</title>
+</head>
+<body>
+    <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -27,8 +28,6 @@
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-</head>
-<body>
 <body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper">
 
@@ -52,10 +51,10 @@
           </li>
           <?php if(empty($_SESSION['id_user']) && empty($_SESSION['id_company'])) { ?>
           <li>
-            <a href="login">Login</a>
+            <a href="login.php">Login</a>
           </li>
           <li>
-            <a href="Registeration">Sign Up</a>
+            <a href="sign-up.php">Sign Up</a>
           </li>  
           <?php } else { 
 
@@ -86,8 +85,9 @@
     <section class="content-header">
       <div class="container">
         <div class="row latest-job margin-top-50 margin-bottom-20 bg-white">
-          <h1 class="text-center margin-bottom-20">CREATE COMPANY PROFILE</h1>
-          <form method="post" id="registerCompanies" action="addcompany.php" enctype="multipart/form-data">
+          <h1 class="text-center margin-bottom-20">CREATE YOUR PROFILE</h1>
+          <form method="GET" id="registerCompanies" action="comsign" enctype="multipart/form-data">
+          <!-- <form method="post" id="registerCompanies" action="addcompany.php" enctype="multipart/form-data"> -->
             <div class="col-md-6 latest-job ">
               <div class="form-group">
                 <input class="form-control input-lg" type="text" name="name" placeholder="Full Name" required>
@@ -144,19 +144,14 @@
                 <input class="form-control input-lg" type="text" name="contactno" placeholder="Phone Number" minlength="10" maxlength="10" autocomplete="off" onkeypress="return validatePhone(event);" required>
               </div>
               <div class="form-group">
-            
-
-              </div>  
-              <div id="stateDiv" class="form-group" style="display: none;">
-                <select class="form-control  input-lg" id="state" name="state" required>
-                  <option value="" selected="">Select State</option>
-                </select>
-              </div>   
-              <div id="cityDiv" class="form-group" style="display: none;">
-                <select class="form-control  input-lg" id="city" name="city" required>
-                  <option selected="">Select City</option>
-                </select>
+              <div class="form-group">
+                <input class="form-control input-lg" type="text" name="state" placeholder="State Name"; required>
               </div>
+              <div class="form-group">
+              <div class="form-group">
+                <input class="form-control input-lg" type="text" name="city" placeholder="City Name"; required>
+              </div>
+              
               <div class="form-group">
                 <label>Attach Company Logo</label>
                 <input type="file" name="image" class="form-control input-lg" required>
@@ -213,37 +208,6 @@
           return false;
         } else return true;
       }
-</script>
-
-<script>
-  $("#country").on("change", function() {
-    var id = $(this).find(':selected').attr("data-id");
-    $("#state").find('option:not(:first)').remove();
-    if(id != '') {
-      $.post("state.php", {id: id}).done(function(data) {
-        $("#state").append(data);
-      });
-      $('#stateDiv').show();
-    } else {
-      $('#stateDiv').hide();
-      $('#cityDiv').hide();
-    }
-  });
-</script>
-
-<script>
-  $("#state").on("change", function() {
-    var id = $(this).find(':selected').attr("data-id");
-    $("#city").find('option:not(:first)').remove();
-    if(id != '') {
-      $.post("city.php", {id: id}).done(function(data) {
-        $("#city").append(data);
-      });
-      $('#cityDiv').show();
-    } else {
-      $('#cityDiv').hide();
-    }
-  });
 </script>
 <script>
   $("#registerCompanies").on("submit", function(e) {

@@ -37,7 +37,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">Admin Login</p>
 
-    <form action="checklogin.php" method="post">
+    <form method="GET" action="adlogins">
       <div class="form-group has-feedback">
         <input type="text" class="form-control" name="username" placeholder="Username">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -49,7 +49,7 @@
       <div class="row">
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat"><a href="dashboard">Sign In</a></button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
         </div>
         <!-- /.col -->
       </div>

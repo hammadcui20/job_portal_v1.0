@@ -66,14 +66,14 @@
               <div class="box-body no-padding">
                 <ul class="nav nav-pills nav-stacked">
                   <li class="active"><a href="comdashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                  <li><a href="comdashboard"><i class="fa fa-tv"></i> My Company</a></li>
-                  <li><a href="comdashboard"><i class="fa fa-file-o"></i> Create Job Post</a></li>
-                  <li><a href="comdashboard"><i class="fa fa-file-o"></i> My Job Post</a></li>
-                  <li><a href="comdashboard"><i class="fa fa-file-o"></i> Job Application</a></li>
-                  <li><a href="comdashboard"><i class="fa fa-envelope"></i> Mailbox</a></li>
-                  <li><a href="comdashboard"><i class="fa fa-gear"></i> Settings</a></li>
-                  <li><a href="comdashboard"><i class="fa fa-user"></i> Resume Database</a></li>
-                  <li><a href="comdashboard"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                  <li><a href="edit"><i class="fa fa-tv"></i> My Company</a></li>
+                  <li><a href="create"><i class="fa fa-file-o"></i> Create Job Post</a></li>
+                  <li><a href="myjob"><i class="fa fa-file-o"></i> My Job Post</a></li>
+                  <li><a href="jobapp"><i class="fa fa-file-o"></i> Job Application</a></li>
+                  <li><a href="mailbox"><i class="fa fa-envelope"></i> Mailbox</a></li>
+                  <li><a href="settings"><i class="fa fa-gear"></i> Settings</a></li>
+                  <li><a href="resume"><i class="fa fa-user"></i> Resume Database</a></li>
+                  <li><a href="out"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
                 </ul>
               </div>
             </div>

@@ -63,16 +63,16 @@
           <div class="col-md-3">
             <div class="box box-solid">
               <div class="box-header with-border">
-                <h3 class="box-title">Welcome <b><?php echo $_SESSION['name']; ?></b></h3>
+                <h3 class="box-title">Welcome <b></b></h3>
               </div>
               <div class="box-body no-padding">
                 <ul class="nav nav-pills nav-stacked">
-                  <li class="active"><a href="edit-profile.php"><i class="fa fa-user"></i> Edit Profile</a></li>
-                  <li><a href="index.php"><i class="fa fa-address-card-o"></i> My Applications</a></li>
-                  <li><a href="../jobs.php"><i class="fa fa-list-ul"></i> Jobs</a></li>
-                  <li><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li>
-                  <li><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
-                  <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                <li class="active"><a href="edit"><i class="fa fa-user"></i> Edit Profile</a></li>
+                  <li><a href="index"><i class="fa fa-address-card-o"></i> My Applications</a></li>
+                  <li><a href="jobs"><i class="fa fa-list-ul"></i> Jobs</a></li>
+                  <li><a href="mail"><i class="fa fa-envelope"></i> Mailbox</a></li>
+                  <li><a href="settings"><i class="fa fa-gear"></i> Settings</a></li>
+                  <li><a href="out"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
                 </ul>
               </div>
             </div>
@@ -80,40 +80,31 @@
           <div class="col-md-9 bg-white padding-2">
             <h2><i>Edit Profile</i></h2>
             <form action="update-profile.php" method="post" enctype="multipart/form-data">
-            <?php
-            //Sql to get logged in user details.
-            $sql = "SELECT * FROM users WHERE id_user='$_SESSION[id_user]'";
-            $result = $conn->query($sql);
-
-            //If user exists then show his details.
-            if($result->num_rows > 0) {
-              while($row = $result->fetch_assoc()) {
-            ?>
               <div class="row">
                 <div class="col-md-6 latest-job ">
                   <div class="form-group">
                      <label for="fname">First Name</label>
-                    <input type="text" class="form-control input-lg" id="fname" name="fname" placeholder="First Name" onkeypress="return validateName(event);" value="<?php echo $row['firstname']; ?>" required="">
+                    <input type="text" class="form-control input-lg" id="fname" name="fname" placeholder="First Name" onkeypress="return validateName(event);"  required="">
                   </div>
                   <div class="form-group">
                     <label for="lname">Last Name</label>
-                    <input type="text" class="form-control input-lg" id="lname" name="lname" placeholder="Last Name" onkeypress="return validateName(event);" value="<?php echo $row['lastname']; ?>" required="">
+                    <input type="text" class="form-control input-lg" id="lname" name="lname" placeholder="Last Name" onkeypress="return validateName(event);" required="">
                   </div>
                   <div class="form-group">
                     <label for="email">Email address</label>
-                    <input type="email" class="form-control input-lg" id="email" placeholder="Email" value="<?php echo $row['email']; ?>" readonly>
+                    <input type="email" class="form-control input-lg" id="email" placeholder="Email"  readonly>
                   </div>
                   <div class="form-group">
                     <label for="address">Address</label>
-                    <textarea id="address" name="address" class="form-control input-lg" rows="5" placeholder="Address"><?php echo $row['address']; ?></textarea>
+                    <textarea id="address" name="address" class="form-control input-lg" rows="5" placeholder="Address"></textarea>
                   </div>
                   <div class="form-group">
                     <label for="city">City</label>
-                    <input type="text" class="form-control input-lg" id="city" name="city" onkeypress="return validateName(event);" value="<?php echo $row['city']; ?>" placeholder="city">
+                    <input type="text" class="form-control input-lg" id="city" name="city" onkeypress="return validateName(event);"  placeholder="city">
                   </div>
                   <div class="form-group">
                     <label for="state">State</label>
-                    <input type="text" class="form-control input-lg" id="state" name="state"  placeholder="state" onkeypress="return validateName(event);" value="<?php echo $row['state']; ?>">
+                    <input type="text" class="form-control input-lg" id="state" name="state"  placeholder="state" onkeypress="return validateName(event);" >
                   </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-flat btn-success">Update Profile</button>
@@ -122,23 +113,23 @@
                 <div class="col-md-6 latest-job ">
                   <div class="form-group">
                     <label for="contactno">Contact Number</label>
-                    <input type="text" class="form-control input-lg" id="contactno" name="contactno" placeholder="Contact Number" onkeypress="return validatePhone(event);" maxlength="10" minlength="10" value="<?php echo $row['contactno']; ?>">
+                    <input type="text" class="form-control input-lg" id="contactno" name="contactno" placeholder="Contact Number" onkeypress="return validatePhone(event);" maxlength="10" minlength="10">
                   </div>
                   <div class="form-group">
                     <label for="qualification">Highest Qualification</label>
-                    <input type="text" class="form-control input-lg" id="qualification" name="qualification" placeholder="Highest Qualification" value="<?php echo $row['qualification']; ?>">
+                    <input type="text" class="form-control input-lg" id="qualification" name="qualification" placeholder="Highest Qualification" >
                   </div>
                   <div class="form-group">
                     <label for="stream">Stream</label>
-                    <input type="text" class="form-control input-lg" id="stream" name="stream" placeholder="stream" value="<?php echo $row['stream']; ?>">
+                    <input type="text" class="form-control input-lg" id="stream" name="stream" placeholder="stream" >
                   </div>
                   <div class="form-group">
                     <label>Skills</label>
-                    <textarea class="form-control input-lg" rows="4" name="skills" onkeypress="return validateName(event);" ><?php echo $row['skills']; ?></textarea>
+                    <textarea class="form-control input-lg" rows="4" name="skills" onkeypress="return validateName(event);</textarea>
                   </div>
                   <div class="form-group">
                     <label>About Me</label>
-                    <textarea class="form-control input-lg" rows="4" name="aboutme"><?php echo $row['aboutme']; ?></textarea>
+                    <textarea class="form-control input-lg" rows="4" name="aboutme"></textarea>
                   </div>
                   <div class="form-group">
                     <label>Upload/Change Resume</label>
@@ -146,18 +137,15 @@
                   </div>
                 </div>
               </div>
-              <?php
-                }
-              }
-            ?>   
+             
             </form>
-            <?php if(isset($_SESSION['uploadError'])) { ?>
+           
             <div class="row">
               <div class="col-md-12 text-center">
-                <?php echo $_SESSION['uploadError']; ?>
+              
               </div>
             </div>
-            <?php } ?>
+          
           </div>
         </div>
       </div>

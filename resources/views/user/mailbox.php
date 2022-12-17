@@ -1,16 +1,4 @@
-<?php
 
-//To Handle Session Variables on This Page
-session_start();
-
-//If user Not logged in then redirect them back to homepage. 
-if(empty($_SESSION['id_user'])) {
-  header("Location: ../index.php");
-  exit();
-}
-
-require_once("../db.php");
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,16 +66,16 @@ require_once("../db.php");
           <div class="col-md-3">
             <div class="box box-solid">
               <div class="box-header with-border">
-                <h3 class="box-title">Welcome <b><?php echo $_SESSION['name']; ?></b></h3>
+                <h3 class="box-title">Welcome <b></b></h3>
               </div>
               <div class="box-body no-padding">
                 <ul class="nav nav-pills nav-stacked">
-                  <li><a href="edit-profile.php"><i class="fa fa-user"></i> Edit Profile</a></li>
-                  <li><a href="index.php"><i class="fa fa-address-card-o"></i> My Applications</a></li>
-                  <li><a href="../jobs.php"><i class="fa fa-list-ul"></i> Jobs</a></li>
-                  <li class="active"><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li>
-                  <li><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
-                  <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                <li><a href="edit"><i class="fa fa-user"></i> Edit Profile</a></li>
+                  <li><a href="index"><i class="fa fa-address-card-o"></i> My Applications</a></li>
+                  <li><a href="jobs"><i class="fa fa-list-ul"></i> Jobs</a></li>
+                  <li class="active"><a href="mail"><i class="fa fa-envelope"></i> Mailbox</a></li>
+                  <li><a href="settings"><i class="fa fa-gear"></i> Settings</a></li>
+                  <li><a href="out"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
                 </ul>
               </div>
             </div>
@@ -115,20 +103,11 @@ require_once("../db.php");
                     </tr>
                   </thead>
                   <tbody>
-                  <?php
-                    $sql = "SELECT * FROM mailbox WHERE id_fromuser='$_SESSION[id_user]' OR id_touser='$_SESSION[id_user]'";
-                    $result = $conn->query($sql);
-                    if($result->num_rows >  0 ){
-                        while($row = $result->fetch_assoc()) {
-                  ?>
+
                   <tr>
-                    <td class="mailbox-subject"><a href="read-mail.php?id_mail=<?php echo $row['id_mailbox']; ?>"><?php echo $row['subject']; ?></a></td>
-                    <td class="mailbox-date"><?php echo date("d-M-Y h:i a", strtotime($row['createdAt'])); ?></td>
+
                   </tr>
-                  <?php
-                      }
-                    }
-                  ?>
+
                   </tbody>
                   <tfoot>
                     <tr>

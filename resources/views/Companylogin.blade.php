@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin-Login</title>
+    <title>Company-Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -34,7 +34,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">Company Login</p>
 
-    <form method="post" action="">
+    <form method="GET" action="comlogins">
       <div class="form-group has-feedback">
         <input type="email" name="email" class="form-control" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -49,13 +49,11 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat"><a href="comdashboard">Sign In</a></button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
         </div>
         <!-- /.col -->
         <div class="col-xs-12">
-                <div>
-                  <p class="text-center">Invalid Email/Password! Try Again!</p>
-                </div>  
+  
           </div>          
       </div>
     </form>
@@ -68,7 +66,7 @@
 <!-- /.login-box -->
 
 <!-- jQuery 3 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
@@ -83,6 +81,6 @@
       increaseArea: '20%' // optional
     });
   });
-</script>
+</script> --}}
 </body>
 </html>
