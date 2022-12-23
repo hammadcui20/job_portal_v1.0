@@ -68,7 +68,10 @@
         </li>
         <li>
           <a href="Registeration">Sign Up</a>
-        </li>  
+        </li> 
+        <li>
+          <a href="contact-us">Contact Us</a>
+        </li> 
         <?php } else { 
 
           if(isset($_SESSION['id_user'])) { 

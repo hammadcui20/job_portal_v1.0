@@ -28,7 +28,8 @@ function insert(Request $req){
     $newuser->state = $req->input("state");
     $newuser->skills = $req->input("skills");
     $newuser->desig = $req->input("desig");
-    $newuser->pdf = $req->input("pdf");
+    $newuser->pdf = $req->input("pdf")->getClientOriginalName();
+    $re->pdf->move(public_path('pdf',$pdf));
     $newuser->save();
     return redirect("candidateLogin");
 }

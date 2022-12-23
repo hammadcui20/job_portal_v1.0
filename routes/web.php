@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\candidates;
 use App\Http\Controllers\companies;
 use App\Http\Controllers\admins;
+use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,7 +26,6 @@ Route::get('Registeration',function(){
 Route::get('Company-Registeration',function(){
     return view('companyregister');
 });
-
 
 //Candidate Routing
 Route::get('candashboard',function(){
@@ -113,3 +113,9 @@ Route::get('out',function()
     return view('welcome');
 });
 
+//Mailing Server
+Route::get('contact-us',function(){
+    return view('contact');
+});
+Route::get('contact-us', [ContactController::class, 'index']);
+Route::post('contact-us', [ContactController::class, 'store'])->name('contact.us.store');
