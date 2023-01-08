@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +21,9 @@
   <link rel="stylesheet" href="../css/custom.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+
+  <script src="../js/tinymce/tinymce.min.js"></script>
+  <script>tinymce.init({ selector:'#description', height: 150 });</script>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -66,69 +70,102 @@
           <div class="col-md-3">
             <div class="box box-solid">
               <div class="box-header with-border">
-                <h3 class="box-title">Welcome <b></b></h3>
+              @Auth
+                <h3 class="box-title">Welcome  {{auth()->user()->name}}</h3>
+                @endauth
               </div>
               <div class="box-body no-padding">
-                <ul class="nav nav-pills nav-stacked">
-                <li><a href="edit"><i class="fa fa-user"></i> Edit Profile</a></li>
-                  <li><a href="index"><i class="fa fa-address-card-o"></i> My Applications</a></li>
+                <!-- <ul class="nav nav-pills nav-stacked">
+                <li><a href="editcan"><i class="fa fa-user"></i> Edit Profile</a></li>
+                  <li><a href="cv-upload"><i class="fa fa-user"></i> Cv Upload</a></li>
+                  <li class="active"><a href="index"><i class="fa fa-address-card-o"></i> My Applications</a></li>
                   <li><a href="jobs"><i class="fa fa-list-ul"></i> Jobs</a></li>
-                  <li class="active"><a href="mail"><i class="fa fa-envelope"></i> Mailbox</a></li>
+                  <li><a href="mail"><i class="fa fa-envelope"></i> Mailbox</a></li>
                   <li><a href="settings"><i class="fa fa-gear"></i> Settings</a></li>
                   <li><a href="out"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                </ul> -->
+                <ul class="nav nav-pills nav-stacked">
+                <li><a href="editcan"><i class="fa fa-user"></i> Edit Profile</a></li>
+                  <li><a href="cv-upload"><i class="fa fa-user"></i> Cv Upload</a></li>
+                  <li class="activecan"><a href="index"><i class="fa fa-address-card-o"></i> My Applications</a></li>
+                  <li><a href="jobscan"><i class="fa fa-list-ul"></i> Jobs</a></li>
+                  <!-- <li class="active"><a href="mailcan"><i class="fa fa-envelope"></i> Mailbox</a></li> -->
+                  <li><a href="settingscan"><i class="fa fa-gear"></i> Settings</a></li>
+                  <!-- <li><a href="out"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li> -->
+                  
+                  @auth
+                  <!-- {{auth()->user()->name}} -->
+                  <li><a href="{{ route('logout.perform') }}"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                  @endauth
                 </ul>
               </div>
             </div>
           </div>
           <div class="col-md-9 bg-white padding-2">
           <section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title" style="margin-bottom: 20px;">Mailbox</h3>
-              <div class="pull-right">
-                <a href="create-mail.php" class="btn btn-warning btn-flat"><i class="fa fa-envelope"></i> Create</a>
+            <div class="row">
+              <div class="col-md-12">
+                <a href="mailbox.php" class="btn btn-default"><i class="fa fa-arrow-circle-left"></i> Back</a>
+                <div class="box box-primary">
+                  <!-- /.box-header -->
+                  <div class="box-body no-padding">
+                    <div class="mailbox-read-info">
+                      <h3></h3>
+
+                    </div>
+                    <div class="mailbox-read-message">
+                      <?php echo stripcslashes($row['message']); ?>
+                    </div>
+                    <!-- /.mailbox-read-message -->
+                  </div>
+                  <!-- /.box-body -->
+                </div>
+
+              
+                  <div class="box box-primary">
+                    <div class="box-body no-padding">
+                      <div class="mailbox-read-info">
+                        <h3>Reply Message</h3>
+                           </div>
+                      <div class="mailbox-read-message">
+                       
+                      </div>
+                    </div>
+                  </div>
+                  
+                  }
+                }
+                
+                
+
+                <div class="box box-primary">
+                  <!-- /.box-header -->
+                  <div class="box-body no-padding">
+                    <div class="mailbox-read-info">
+                      <h3>Send Reply</h3>
+                    </div>
+                    <div class="mailbox-read-message">
+                      <form action="reply-mailbox.php" method="post">
+                        <div class="form-group">
+                          <textarea class="form-control input-lg" id="description" name="description" placeholder="Job Description"></textarea>
+                          <input type="hidden" name="id_mail" >
+                        </div>
+                        <div class="form-group">
+                          <button type="submit" class="btn btn-flat btn-success">Reply</button>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- /.mailbox-read-message -->
+                  </div>
+                  <!-- /.box-body -->
+                </div>
+
+
               </div>
-              <!-- /.box-tools -->
+              <!-- /.col -->
             </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <div class="table-responsive mailbox-messages">
-                <table id="example1" class="table table-hover table-striped">
-                  <thead>
-                    <tr>
-                      <th>Subject</th>
-                      <th>Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                  <tr>
-
-                  </tr>
-
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <th>Subject</th>
-                      <th>Date</th>
-                    </tr>
-                  </tfoot>
-                </table>
-                <!-- /.table -->
-              </div>
-              <!-- /.mail-box-messages -->
-            </div>
-            <!-- /.box-body -->
-            
-          </div>
-          <!-- /. box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
+            <!-- /.row -->
+          </section>
 
           </div>
         </div>

@@ -15,20 +15,16 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('u_id');
             $table->string('name');
             $table->string('companyname');
             $table->string('website');
             $table->string('email');
             $table->string('aboutme');
-
-            $table->string('password');
-            $table->string('cpassword');
             $table->string('contactno');
             $table->string('state');
             $table->string('city');
-            $table->string('image');
-    
-            
+            // $table->string('image');
             $table->timestamps();
         });
     }

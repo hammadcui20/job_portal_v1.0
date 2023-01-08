@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job-Portal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"> --}}
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -64,10 +65,10 @@
         </li>
         <?php if(empty($_SESSION['id_user']) && empty($_SESSION['id_company'])) { ?>
         <li>
-          <a href="Login">Login</a>
+          <a href="{{ route('login') }}">Login</a>
         </li>
         <li>
-          <a href="Registeration">Sign Up</a>
+          <a href="{{ route('register') }}">Sign Up</a>
         </li> 
         <li>
           <a href="contact-us">Contact Us</a>
@@ -104,13 +105,13 @@
         <div class="col-md-12 text-center index-head">
           <h1>All <strong>JOBS</strong> In One Place</h1>
           <p>One search, global reach</p>
-          <p><a class="btn btn-success btn-lg" href="jobs.php" role="button">Search Jobs</a></p>
+          <p><a class="btn btn-success btn-lg" href="{{Route('users.index')}}" role="button">Search Jobs</a></p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="content-header">
+  {{-- <section class="content-header">
     <div class="container">
       <div class="row">
         <div class="col-md-12 latest-job margin-bottom-20">
@@ -120,12 +121,13 @@
             <div  class="add1">
             <img  class="attachment-img" src="img/photo1.png" alt="Attachment Image">
             <p>Required a new Full stack web developer in NewYork.• Job Type: Support Staff - Union• Bargaining Unit: SSA• Regular/Temporary: Regular...</p>
-            </div>
+           
+          </div>
 
         </div>
       </div>
     </div>
-  </section>
+  </section> --}}
 
   <section id="candidates" class="content-header">
     <div class="container">
@@ -313,8 +315,12 @@
 
 <!-- jQuery 3 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script> --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" ></script> --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script> --}}
 <!-- Bootstrap 3.3.7 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <!-- AdminLTE App -->
 <script src="js/adminlte.min.js"></script>
 </body>

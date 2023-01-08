@@ -1,3 +1,56 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Laravel 9 File Upload Example - ItSolutionStuff.com</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+      
+<body>
+<div class="container">
+       
+    <div class="panel panel-primary">
+  
+      <div class="panel-heading">
+        <h2>Laravel 9 File Upload Example - ItSolutionStuff.com</h2>
+      </div>
+  
+      <div class="panel-body">
+       
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <strong>{{ $message }}</strong>
+            </div>
+        @endif
+      
+        <form action="{{ route('file.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+  
+            <div class="mb-3">
+                <label class="form-label" for="inputFile">File:</label>
+                <input 
+                    type="file" 
+                    name="file" 
+                    id="inputFile"
+                    class="form-control @error('file') is-invalid @enderror">
+  
+                @error('file')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+   
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success">Upload</button>
+            </div>
+       
+        </form>
+      
+      </div>
+    </div>
+</div>
+</body>
+    
+</html> -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +101,7 @@
         <ul class="nav navbar-nav">
           <li>
             <a href="../jobs.php">Jobs</a>
-          </li>          
+          </li>
         </ul>
       </div>
     </nav>
@@ -63,31 +116,68 @@
           <div class="col-md-3">
             <div class="box box-solid">
               <div class="box-header with-border">
-                <h3 class="box-title">Welcome </h3>
+              @Auth
+                <h3 class="box-title">Welcome  {{auth()->user()->name}}</h3>
+                @endauth
               </div>
               <div class="box-body no-padding">
-                <ul class="nav nav-pills nav-stacked">
-                  <li><a href="edit"><i class="fa fa-user"></i> Edit Profile</a></li>
+                <!-- <ul class="nav nav-pills nav-stacked">
+                <li><a href="editcan"><i class="fa fa-user"></i> Edit Profile</a></li>
+                  <li><a href="cv-upload"><i class="fa fa-user"></i> Cv Upload</a></li>
                   <li class="active"><a href="index"><i class="fa fa-address-card-o"></i> My Applications</a></li>
                   <li><a href="jobs"><i class="fa fa-list-ul"></i> Jobs</a></li>
                   <li><a href="mail"><i class="fa fa-envelope"></i> Mailbox</a></li>
                   <li><a href="settings"><i class="fa fa-gear"></i> Settings</a></li>
                   <li><a href="out"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                </ul> -->
+                <ul class="nav nav-pills nav-stacked">
+                <li><a href="editcan"><i class="fa fa-user"></i> Edit Profile</a></li>
+                  <li class="active"><a href="cv-upload"><i class="fa fa-user"></i> Cv Upload</a></li>
+                  <li class="activecan"><a href="index"><i class="fa fa-address-card-o"></i> My Applications</a></li>
+                  <li><a href="jobscan"><i class="fa fa-list-ul"></i> Jobs</a></li>
+                  <!-- <li><a href="mailcan"><i class="fa fa-envelope"></i> Mailbox</a></li> -->
+                  <li><a href="settingscan"><i class="fa fa-gear"></i> Settings</a></li>
+                  @Auth
+                  <li><a href="{{ route('logout.perform') }}"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                  @endauth
                 </ul>
               </div>
             </div>
           </div>
           <div class="col-md-9 bg-white padding-2">
-            <h2><i>Recent Applications</i></h2>
-            <p>Below you will find job roles you have applied for</p>
-
-            
-            <div class="attachment-block clearfix padding-2">
-                <h4 class="attachment-heading"><a href="view-job-post.php?id=?</a></h4>
-                <div class="attachment-text padding-2">
-                  <div class="pull-left"><i class="fa fa-calendar"></i></div>        
-                </div>
+            <div class="row">
+              <div class="col-md-6">
+              @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <strong>{{ $message }}</strong>
             </div>
+        @endif
+      
+        <form action="{{ route('file.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+  
+            <div class="mb-3">
+                <label class="form-label" for="inputFile">File:</label>
+                <input 
+                    type="file" 
+                    name="file" 
+                    id="inputFile"
+                    class="form-control @error('file') is-invalid @enderror">
+  
+                @error('file')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+   
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success">Upload</button>
+            </div>
+       
+        </form>
+
+              </div>
+            </div>
+            
           </div>
         </div>
       </div>

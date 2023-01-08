@@ -86,7 +86,8 @@
       <div class="container">
         <div class="row latest-job margin-top-50 margin-bottom-20 bg-white">
           <h1 class="text-center margin-bottom-20">CREATE YOUR PROFILE</h1>
-          <form method="GET" id="registerCandidates" action="csign" enctype="multipart/form-data">
+          <form method="PUT" id="registerCandidates" action="csign" enctype="multipart/form-data">
+            @csrf
             <div class="col-md-6 latest-job ">
               <div class="form-group">
                 <input class="form-control input-lg" type="text" id="fname" name="fname" placeholder="First Name *" required>
@@ -95,7 +96,7 @@
                 <input class="form-control input-lg" type="text" id="lname" name="lname" placeholder="Last Name *" required>
               </div>
               <div class="form-group">
-                <input class="form-control input-lg" type="text" id="email" name="email" placeholder="Email *" required>
+                <input class="form-control input-lg" type="text" id="email" name="email" value="{{ Auth::user()->email }}" readonly>
               </div>
               <div class="form-group">
                 <textarea class="form-control input-lg" rows="4" id="aboutme" name="intro" placeholder="Brief intro about yourself *" required></textarea>
@@ -121,7 +122,7 @@
                 <label><input type="checkbox"> I accept terms & conditions</label>
               </div>
               <div class="form-group">
-                <button class="btn btn-flat btn-success">Register</button>
+                <!-- <button class="btn btn-flat btn-success">Register</button> -->
               </div>
               <?php 
               //If User already registered with this email then show error message.
@@ -142,15 +143,15 @@
 
             </div>            
             <div class="col-md-6 latest-job ">
-              <div class="form-group">
+              {{-- <div class="form-group">
                 <input class="form-control input-lg" type="password" id="password" name="password" placeholder="Password *" required>
-              </div>
-              <div class="form-group">
+              </div> --}}
+              {{-- <div class="form-group">
                 <input class="form-control input-lg" type="password" id="cpassword" name="cpassword" placeholder="Confirm Password *" required>
-              </div>
-              <div id="passwordError" class="btn btn-flat btn-danger hide-me" >
+              </div> --}}
+              {{-- <div id="passwordError" class="btn btn-flat btn-danger hide-me" >
                     Password Mismatch!! 
-                  </div>
+                  </div> --}}
               <div class="form-group">
                 <input class="form-control input-lg" type="text" id="contactno" name="phone" minlength="10" maxlength="10" onkeypress="return validatePhone(event);" placeholder="Phone Number">
               </div>
@@ -169,14 +170,29 @@
               <div class="form-group">
                 <input class="form-control input-lg" type="text" id="designation" name="desig" placeholder="Designation">
               </div>
+              <!-- <div class="mb-3">
+                <label class="form-label" for="inputFile">File:</label>
+                <input 
+                    type="file" 
+                    name="file" 
+                    id="inputFile"
+                    class="form-control @error('file') is-invalid @enderror">
+  
+                @error('file')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div> -->
 
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label style="color: red;">File Format PDF Only!</label>
-                <input type="file" name="pdf" class="btn btn-flat btn-danger" required>
-              </div>
+                <input type="file" name="file"id="inputFile"  class="btn btn-flat btn-danger" required>
+              </div> -->
+
             </div>
+            <button type='submit'>Submit</button>
           </form>
-          
+        <!-- <input type="button" value="Submit Form" onclick="submitForms()" /> -->
+
         </div>
       </div>
     </section>
@@ -207,7 +223,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="js/adminlte.min.js"></script>
-
+<!-- <script type="text/javascript">
+  function submitForms()
+  {
+    document.getElementById("fileupload").submit();
+    document.getElementById("registerCandidates").submit();
+  }
+  </script> -->
 <script type="text/javascript">
       function validatePhone(event) {
 

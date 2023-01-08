@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="../css/_all-skins.min.css">
   <!-- Custom -->
   <link rel="stylesheet" href="../css/custom.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -49,7 +51,7 @@
         <ul class="nav navbar-nav">
           <li>
             <a href="../jobs.php">Jobs</a>
-          </li>
+          </li>          
         </ul>
       </div>
     </nav>
@@ -64,48 +66,87 @@
           <div class="col-md-3">
             <div class="box box-solid">
               <div class="box-header with-border">
-                <h3 class="box-title">Welcome <b></b></h3>
+               @Auth
+                <h3 class="box-title">Welcome  {{auth()->user()->name}}</h3>
+                @endauth
               </div>
               <div class="box-body no-padding">
-                <ul class="nav nav-pills nav-stacked">
-                <li><a href="edit"><i class="fa fa-user"></i> Edit Profile</a></li>
-                  <li><a href="index"><i class="fa fa-address-card-o"></i> My Applications</a></li>
+                <!-- <ul class="nav nav-pills nav-stacked">
+                <li><a href="editcan"><i class="fa fa-user"></i> Edit Profile</a></li>
+                  <li><a href="cv-upload"><i class="fa fa-user"></i> Cv Upload</a></li>
+                  <li class="active"><a href="index"><i class="fa fa-address-card-o"></i> My Applications</a></li>
                   <li><a href="jobs"><i class="fa fa-list-ul"></i> Jobs</a></li>
                   <li><a href="mail"><i class="fa fa-envelope"></i> Mailbox</a></li>
-                  <li class="active"><a href="settings"><i class="fa fa-gear"></i> Settings</a></li>
+                  <li><a href="settings"><i class="fa fa-gear"></i> Settings</a></li>
                   <li><a href="out"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                </ul> -->
+                <ul class="nav nav-pills nav-stacked">
+                <li><a href="editcan"><i class="fa fa-user"></i> Edit Profile</a></li>
+                  <li><a href="cv-upload"><i class="fa fa-user"></i> Cv Upload</a></li>
+                  <li class="activecan"><a href="index"><i class="fa fa-address-card-o"></i> My Applications</a></li>
+                  <li><a href="jobscan"><i class="fa fa-list-ul"></i> Jobs</a></li>
+                  <li><a href="mailcan"><i class="fa fa-envelope"></i> Mailbox</a></li>
+                  <li><a href="settingscan"><i class="fa fa-gear"></i> Settings</a></li>
+                  <!-- <li><a href="out"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li> -->
+                  
+                  @auth
+                  <!-- {{auth()->user()->name}} -->
+                  <li><a href="{{ route('logout.perform') }}"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                  @endauth
                 </ul>
               </div>
             </div>
           </div>
           <div class="col-md-9 bg-white padding-2">
-            <h2><i>Change Password</i></h2>
-            <p>Type in new password that you want to use</p>
-            <div class="row">
-              <div class="col-md-6">
-                <form id="changePassword" action="change-password.php" method="post">
-                  <div class="form-group">
-                    <input id="password" class="form-control input-lg" type="password" name="password" autocomplete="off" placeholder="Password" required>
-                  </div>
-                  <div class="form-group">
-                    <input id="cpassword" class="form-control input-lg" type="password" autocomplete="off" placeholder="Confirm Password" required>
-                  </div>
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-flat btn-success">Change Password</button>
-                  </div>
-                  <div id="passwordError" class="color-red text-center hide-me">
-                    Password Mismatch!!
-                  </div>
-                </form>
+          <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title" style="margin-bottom: 20px;">Mailbox</h3>
+              <div class="pull-right">
+                <a href="create-mail.php" class="btn btn-warning btn-flat"><i class="fa fa-envelope"></i> Create</a>
               </div>
-              <div class="col-md-6">
-                <form action="deactivate-account.php" method="post">
-                  <label><input type="checkbox" required> I Want To Deactivate My Account</label>
-                  <button type="submit" class="btn btn-danger btn-flat btn-lg">Deactivate My Account</button>
-                </form>
-              </div>
+              <!-- /.box-tools -->
             </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="table-responsive mailbox-messages">
+                <table id="example1" class="table table-hover table-striped">
+                  <thead>
+                    <tr>
+                      <th>Subject</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  <tr>
+
+                  </tr>
+
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th>Subject</th>
+                      <th>Date</th>
+                    </tr>
+                  </tfoot>
+                </table>
+                <!-- /.table -->
+              </div>
+              <!-- /.mail-box-messages -->
+            </div>
+            <!-- /.box-body -->
             
+          </div>
+          <!-- /. box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+
           </div>
         </div>
       </div>
@@ -123,10 +164,7 @@
     </div>
   </footer>
 
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
+
 
 </div>
 <!-- ./wrapper -->
@@ -137,15 +175,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
+<!-- DataTables -->
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script>
-  $("#changePassword").on("submit", function(e) {
-    e.preventDefault();
-    if( $('#password').val() != $('#cpassword').val() ) {
-      $('#passwordError').show();
-    } else {
-      $(this).unbind('submit').submit();
-    }
-  });
+  $(function () {
+    $('#example1').DataTable();
+  })
 </script>
+
 </body>
 </html>

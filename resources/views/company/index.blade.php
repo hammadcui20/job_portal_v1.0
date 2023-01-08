@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,11 +17,6 @@
   <link rel="stylesheet" href="../css/_all-skins.min.css">
   <!-- Custom -->
   <link rel="stylesheet" href="../css/custom.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-
-  <script src="../js/tinymce/tinymce.min.js"></script>
-  <script>tinymce.init({ selector:'#description', height: 150 });</script>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -67,50 +61,73 @@
           <div class="col-md-3">
             <div class="box box-solid">
               <div class="box-header with-border">
-                <h3 class="box-title">Welcome <b></b></h3>
+              @Auth
+                <h3 class="box-title">Welcome {{auth()->user()->name}}</h3>
+              @endauth
               </div>
               <div class="box-body no-padding">
                 <ul class="nav nav-pills nav-stacked">
-                  <li><a href="edit-profile.php"><i class="fa fa-user"></i> Edit Profile</a></li>
-                  <li><a href="index.php"><i class="fa fa-address-card-o"></i> My Applications</a></li>
-                  <li><a href="../jobs.php"><i class="fa fa-list-ul"></i> Jobs</a></li>
-                  <li class="active"><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li>
-                  <li><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
-                  <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                  <li class="active"><a href="/manager/comdashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                  <li><a href="/manager/editcom"><i class="fa fa-tv"></i> My Company</a></li>
+                  <li><a href="/manager/create"><i class="fa fa-file-o"></i> Create Job Post</a></li>
+                  <li><a href="/manager/myjob"><i class="fa fa-file-o"></i> My Job Post</a></li>
+                  <li><a href="/manager/jobapp"><i class="fa fa-file-o"></i> Job Application</a></li>
+                  <!-- <li><a href="/manager/mailbox"><i class="fa fa-envelope"></i> Mailbox</a></li> -->
+                  <li><a href="/manager/settings"><i class="fa fa-gear"></i> Settings</a></li>
+                  <!-- <li><a href="/manager/resume"><i class="fa fa-user"></i> Resume Database</a></li> -->
+                  <!-- <li><a href="out"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li> -->
+                  @auth
+                  <!-- {{auth()->user()->name}} -->
+                  <li><a href="{{ route('logout.perform') }}"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                  @endauth
                 </ul>
               </div>
             </div>
           </div>
           <div class="col-md-9 bg-white padding-2">
-          <form action="add-mail.php" method="post">
-            <div class="box box-primary">
-              <div class="box-header with-border">
-                <h3 class="box-title">Compose New Message</h3>
-              </div>
-              <!-- /.box-header -->
-              <div class="box-body">
-                <div class="form-group">
-                  <select name="to" class="form-control">
 
-                  </select>
-                </div>
-                <div class="form-group">
-                  <input class="form-control" name="subject" placeholder="Subject:">
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control input-lg" id="description" name="description" placeholder="Job Description"></textarea>
-                </div>
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-                <div class="pull-right">
-                  <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
-                </div>
-                <a href="mailbox.php" class="btn btn-default"><i class="fa fa-times"></i> Discard</a>
-              </div>
-              <!-- /.box-footer -->
+            <h3>Overview</h3>
+            <div class="alert alert-info alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <i class="icon fa fa-info"></i> In this dashboard you are able to change your account settings, post and manage your jobs. Got a question? Do not hesitate to drop us a mail.
             </div>
-          </form>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="info-box bg-c-yellow">
+                  <span class="info-box-icon bg-red"><i class="ion ion-ios-people-outline"></i></span>
+                  <div class="info-box-content">
+                    <span class="info-box-text">Jobs Posted</span>
+                    <span class="info-box-number">
+                      <?php
+                      use Illuminate\Support\Facades\DB;
+                      $user=Auth::id();
+                      $init=DB::table('companies')->where('u_id',$user)->first()->id;
+                      $num = DB::table('jobs')->where('c_id',$init)->count();
+                      echo $num;
+                      ?>
+                    </span>
+                  </div>
+                </div>                
+              </div>
+              <div class="col-md-6">
+                <div class="info-box bg-c-yellow">
+                  <span class="info-box-icon bg-green"><i class="ion ion-ios-browsers"></i></span>
+                  <div class="info-box-content">
+                    <span class="info-box-text">Application For Jobs</span>
+                
+                    <span class="info-box-number">
+                      <?php
+                      $user=Auth::id();
+                      $num = DB::table('apps')->where('com_id',$user)->count();
+                      echo $num;
+                      ?>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -139,13 +156,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../js/adminlte.min.js"></script>
-<!-- DataTables -->
-<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-<script>
-  $(function () {
-    $('#example1').DataTable();
-  })
-</script>
-
 </body>
 </html>

@@ -64,3 +64,11 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+yajra content files
+users.blade.php
+UserController.php
+users table in database
+Moiz
+For Loop in my-job-post not working acc to given criteria
+how to create and store user in both users and candidates/companies table with their u_id in both tables.

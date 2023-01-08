@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,16 +12,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../css/AdminLTE.min.css">
   <link rel="stylesheet" href="../css/_all-skins.min.css">
   <!-- Custom -->
   <link rel="stylesheet" href="../css/custom.css">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
-
-  <script src="../js/tinymce/tinymce.min.js"></script>
-  <script>tinymce.init({ selector:'#description', height: 150 });</script>
+  
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -53,9 +49,7 @@
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <li>
-            <a href="../jobs.php">Jobs</a>
-          </li>          
+                  
         </ul>
       </div>
     </nav>
@@ -70,90 +64,57 @@
           <div class="col-md-3">
             <div class="box box-solid">
               <div class="box-header with-border">
-                <h3 class="box-title">Welcome <b></b></h3>
+              @Auth
+                <h3 class="box-title">Welcome  {{auth()->user()->name}}</h3>
+              @endauth
               </div>
               <div class="box-body no-padding">
-                <ul class="nav nav-pills nav-stacked">
-                  <li><a href="edit-profile.php"><i class="fa fa-user"></i> Edit Profile</a></li>
-                  <li><a href="index.php"><i class="fa fa-address-card-o"></i> My Applications</a></li>
-                  <li><a href="../jobs.php"><i class="fa fa-list-ul"></i> Jobs</a></li>
-                  <li class="active"><a href="mailbox.php"><i class="fa fa-envelope"></i> Mailbox</a></li>
-                  <li><a href="settings.php"><i class="fa fa-gear"></i> Settings</a></li>
-                  <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+              <ul class="nav nav-pills nav-stacked">
+                  <li ><a href="/manager/comdashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                  <li><a href="/manager/editcom"><i class="fa fa-tv"></i> My Company</a></li>
+                  <li><a href="/manager/create"><i class="fa fa-file-o"></i> Create Job Post</a></li>
+                  <li class="active"><a href="/manager/myjob"><i class="fa fa-file-o"></i> My Job Post</a></li>
+                  <li><a href="/manager/jobapp"><i class="fa fa-file-o"></i> Job Application</a></li>
+                  <!-- <li><a href="/manager/mailbox"><i class="fa fa-envelope"></i> Mailbox</a></li> -->
+                  <li><a href="/manager/settings"><i class="fa fa-gear"></i> Settings</a></li>
+                  <!-- <li><a href="/manager/resume"><i class="fa fa-user"></i> Resume Database</a></li> -->
+                  <!-- <li><a href="out"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li> -->
+                  @auth
+                  <!-- {{auth()->user()->name}} -->
+                  <li><a href="{{ route('logout.perform') }}"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                  @endauth
                 </ul>
               </div>
             </div>
           </div>
           <div class="col-md-9 bg-white padding-2">
-          <section class="content">
-            <div class="row">
+            <h2><i>My Job Posts</i></h2>
+            <p>In this section you can view all job posts created by you.</p>
+            <div class="row margin-top-20">
               <div class="col-md-12">
-                <a href="mailbox.php" class="btn btn-default"><i class="fa fa-arrow-circle-left"></i> Back</a>
-                <div class="box box-primary">
-                  <!-- /.box-header -->
-                  <div class="box-body no-padding">
-                    <div class="mailbox-read-info">
-                      <h3></h3>
-
-                    </div>
-                    <div class="mailbox-read-message">
-                      <?php echo stripcslashes($row['message']); ?>
-                    </div>
-                    <!-- /.mailbox-read-message -->
-                  </div>
-                  <!-- /.box-body -->
+                <div class="box-body table-responsive no-padding">
+                  <table id="example2" class="table table-hover">
+                    <thead>
+                      <th>Job Title</th>
+                      <th>Description</th>
+                    </thead>
+                    <tbody>
+                    @foreach($data as $row)
+                    <tr>
+                      <td>{{$row->jobtitle}}</td>
+                      <td>{{$row->description}}</td>
+                    </tr>
+                    @endforeach
+                    </tbody>                    
+                  </table>
                 </div>
-
-              
-                  <div class="box box-primary">
-                    <div class="box-body no-padding">
-                      <div class="mailbox-read-info">
-                        <h3>Reply Message</h3>
-                           </div>
-                      <div class="mailbox-read-message">
-                       
-                      </div>
-                    </div>
-                  </div>
-                  
-                  }
-                }
-                
-                
-
-                <div class="box box-primary">
-                  <!-- /.box-header -->
-                  <div class="box-body no-padding">
-                    <div class="mailbox-read-info">
-                      <h3>Send Reply</h3>
-                    </div>
-                    <div class="mailbox-read-message">
-                      <form action="reply-mailbox.php" method="post">
-                        <div class="form-group">
-                          <textarea class="form-control input-lg" id="description" name="description" placeholder="Job Description"></textarea>
-                          <input type="hidden" name="id_mail" >
-                        </div>
-                        <div class="form-group">
-                          <button type="submit" class="btn btn-flat btn-success">Reply</button>
-                        </div>
-                      </form>
-                    </div>
-                    <!-- /.mailbox-read-message -->
-                  </div>
-                  <!-- /.box-body -->
-                </div>
-
-
               </div>
-              <!-- /.col -->
             </div>
-            <!-- /.row -->
-          </section>
-
           </div>
         </div>
       </div>
     </section>
+
 
     
 
@@ -167,7 +128,10 @@
     </div>
   </footer>
 
-
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
 
 </div>
 <!-- ./wrapper -->
@@ -176,15 +140,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../js/adminlte.min.js"></script>
 <!-- DataTables -->
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../js/adminlte.min.js"></script>
+
+
 <script>
   $(function () {
-    $('#example1').DataTable();
-  })
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    });
+  });
 </script>
-
 </body>
 </html>

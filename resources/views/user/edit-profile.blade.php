@@ -63,48 +63,65 @@
           <div class="col-md-3">
             <div class="box box-solid">
               <div class="box-header with-border">
-                <h3 class="box-title">Welcome <b></b></h3>
+              @Auth
+                <h3 class="box-title">Welcome  {{auth()->user()->name}}</h3>
+                @endauth
               </div>
               <div class="box-body no-padding">
-                <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="edit"><i class="fa fa-user"></i> Edit Profile</a></li>
-                  <li><a href="index"><i class="fa fa-address-card-o"></i> My Applications</a></li>
+                <!-- <ul class="nav nav-pills nav-stacked">
+                <li><a href="editcan"><i class="fa fa-user"></i> Edit Profile</a></li>
+                  <li><a href="cv-upload"><i class="fa fa-user"></i> Cv Upload</a></li>
+                  <li class="active"><a href="index"><i class="fa fa-address-card-o"></i> My Applications</a></li>
                   <li><a href="jobs"><i class="fa fa-list-ul"></i> Jobs</a></li>
                   <li><a href="mail"><i class="fa fa-envelope"></i> Mailbox</a></li>
                   <li><a href="settings"><i class="fa fa-gear"></i> Settings</a></li>
                   <li><a href="out"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                </ul> -->
+                <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="editcan"><i class="fa fa-user"></i> Edit Profile</a></li>
+                  <li><a href="cv-upload"><i class="fa fa-user"></i> Cv Upload</a></li>
+                  <li class="activecan"><a href="index"><i class="fa fa-address-card-o"></i> My Applications</a></li>
+                  <li><a href="jobscan"><i class="fa fa-list-ul"></i> Jobs</a></li>
+                  <!-- <li><a href="mailcan"><i class="fa fa-envelope"></i> Mailbox</a></li> -->
+                  <li><a href="settingscan"><i class="fa fa-gear"></i> Settings</a></li>
+                  <!-- <li><a href="out"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li> -->
+                  @auth
+                  <!-- {{auth()->user()->name}} -->
+                  <li><a href="{{ route('logout.perform') }}"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
+                  @endauth
                 </ul>
               </div>
             </div>
           </div>
           <div class="col-md-9 bg-white padding-2">
             <h2><i>Edit Profile</i></h2>
-            <form action="update-profile.php" method="post" enctype="multipart/form-data">
+            <form action="{{ route('profile.update')}}" method="post" enctype="multipart/form-data">
+              @csrf
               <div class="row">
                 <div class="col-md-6 latest-job ">
                   <div class="form-group">
                      <label for="fname">First Name</label>
-                    <input type="text" class="form-control input-lg" id="fname" name="fname" placeholder="First Name" onkeypress="return validateName(event);"  required="">
+                    <input type="text" value="{{$data->fname}}" class="form-control input-lg" id="fname" name="fname" placeholder="First Name" onkeypress="return validateName(event);"  required="">
                   </div>
                   <div class="form-group">
                     <label for="lname">Last Name</label>
-                    <input type="text" class="form-control input-lg" id="lname" name="lname" placeholder="Last Name" onkeypress="return validateName(event);" required="">
+                    <input type="text" value="{{$data->lname}}" class="form-control input-lg" id="lname" name="lname" placeholder="Last Name" onkeypress="return validateName(event);" required="">
                   </div>
                   <div class="form-group">
                     <label for="email">Email address</label>
-                    <input type="email" class="form-control input-lg" id="email" placeholder="Email"  readonly>
+                    <input type="email" class="form-control input-lg" id="email" placeholder="{{ Auth::user()->email }}"  readonly>
                   </div>
                   <div class="form-group">
                     <label for="address">Address</label>
-                    <textarea id="address" name="address" class="form-control input-lg" rows="5" placeholder="Address"></textarea>
+                    <textarea id="address" value="{{$data->address}}" name="address" class="form-control input-lg" rows="5" placeholder="Address">{{$data->address}}</textarea>
                   </div>
                   <div class="form-group">
                     <label for="city">City</label>
-                    <input type="text" class="form-control input-lg" id="city" name="city" onkeypress="return validateName(event);"  placeholder="city">
+                    <input type="text" value="{{$data->city}}" class="form-control input-lg" id="city" name="city" onkeypress="return validateName(event);"  placeholder="city">
                   </div>
                   <div class="form-group">
                     <label for="state">State</label>
-                    <input type="text" class="form-control input-lg" id="state" name="state"  placeholder="state" onkeypress="return validateName(event);" >
+                    <input type="text" value="{{$data->state}}" class="form-control input-lg" id="state" name="state"  placeholder="state" onkeypress="return validateName(event);" >
                   </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-flat btn-success">Update Profile</button>
@@ -113,39 +130,55 @@
                 <div class="col-md-6 latest-job ">
                   <div class="form-group">
                     <label for="contactno">Contact Number</label>
-                    <input type="text" class="form-control input-lg" id="contactno" name="contactno" placeholder="Contact Number" onkeypress="return validatePhone(event);" maxlength="10" minlength="10">
+                    <input type="text" value="{{$data->phone}}" class="form-control input-lg" id="contactno" name="contactno" placeholder="Contact Number" onkeypress="return validatePhone(event);" maxlength="10" minlength="10">
                   </div>
                   <div class="form-group">
                     <label for="qualification">Highest Qualification</label>
-                    <input type="text" class="form-control input-lg" id="qualification" name="qualification" placeholder="Highest Qualification" >
+                    <input type="text" value="{{$data->hq}}" class="form-control input-lg" id="qualification" name="qualification" placeholder="Highest Qualification" >
                   </div>
                   <div class="form-group">
                     <label for="stream">Stream</label>
-                    <input type="text" class="form-control input-lg" id="stream" name="stream" placeholder="stream" >
+                    <input type="text" value="{{$data->stream}}" class="form-control input-lg" id="stream" name="stream" placeholder="stream" >
                   </div>
                   <div class="form-group">
                     <label>Skills</label>
-                    <textarea class="form-control input-lg" rows="4" name="skills" onkeypress="return validateName(event);</textarea>
+                    <textarea class="form-control input-lg" rows="4" name="skills" onkeypress="return validateName(event)">{{$data->skills}}</textarea>
+                    <!-- <textarea class="form-control input-lg"  value="{{$data->intro}}" rows="4" name="aboutme">{{$data->intro}}</textarea> -->
                   </div>
                   <div class="form-group">
                     <label>About Me</label>
-                    <textarea class="form-control input-lg" rows="4" name="aboutme"></textarea>
+                    <textarea class="form-control input-lg"  value="{{$data->intro}}" rows="4" name="aboutme">{{$data->intro}}</textarea>
                   </div>
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label>Upload/Change Resume</label>
                     <input type="file" name="resume" class="btn btn-default">
-                  </div>
+                  </div> -->
                 </div>
               </div>
-             
             </form>
-           
+            <!-- <form action="{{ route('file.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+  
+            <div class="form-group">
+                <label class="form-label" for="inputFile">File:</label>
+                <input 
+                    type="file" 
+                    name="file" 
+                    id="inputFile"
+                    class="form-control @error('file') is-invalid @enderror">
+  
+                @error('file')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success">Upload</button>
+          </div>
+        </form> -->
             <div class="row">
               <div class="col-md-12 text-center">
-              
               </div>
             </div>
-          
           </div>
         </div>
       </div>

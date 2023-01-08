@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('u_id');
             $table->string('fname');
             $table->string('lname');
             $table->string('email');
@@ -24,9 +25,6 @@ return new class extends Migration
             $table->date('pyear');
             $table->string('hq');
             $table->string('stream');
-
-            $table->string('password');
-            $table->string('cpassword');
             $table->string('phone');
             $table->string('address');
             $table->string('city');
@@ -34,12 +32,9 @@ return new class extends Migration
             $table->string('skills');
             $table->string('desig');
             $table->string('pdf');
-    
-            
             $table->timestamps();
         });
-    }
-
+}
     /**
      * Reverse the migrations.
      *
